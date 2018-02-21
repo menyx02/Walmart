@@ -1,5 +1,7 @@
 package Model;
 
+import Utils.Tools;
+
 public class Seat {
 
     public enum Status {
@@ -36,4 +38,12 @@ public class Seat {
     public long getLastModified() {return lastModified;}
 
     public int getPrice() {return price;}
+
+    public String prettyPrintStatus() {
+        if(status == Status.AVAILABLE) return (Tools.ANSI_GREEN + " S " + Tools.ANSI_RESET);
+        else if(status == Status.HELD) return (Tools.ANSI_YELLOW + " S " + Tools.ANSI_RESET);
+        else if(status == Status.RESERVED) return (Tools.ANSI_RED + " S " + Tools.ANSI_RESET);
+        else return "extra, should not be here";
+    }
+
 }

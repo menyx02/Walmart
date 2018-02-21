@@ -34,7 +34,7 @@ public class Driver {
 
 
         //Initialize Venue
-        Venue venue = new Venue();
+        Venue venue = new Venue(9, 32);
 
         //Initialize Scheduler
         Scheduler scheudler = new Scheduler();
