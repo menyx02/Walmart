@@ -1,10 +1,13 @@
 package Menus;
 
+import Schedulers.Scheduler;
+import Venues.Venue;
+
 public class ReserveSeats extends AMenu{
 
-    public ReserveSeats(int optionNumber) {
-        super(optionNumber);
-        super.optionDescription = "Look up reservations";
+    public ReserveSeats(int optionNumber, Scheduler scheduler) {
+        super(optionNumber, scheduler);
+        super.optionDescription = "Reserve seats";
     }
 
 

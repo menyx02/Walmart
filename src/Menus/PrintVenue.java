@@ -5,14 +5,13 @@ import Venues.Venue;
 
 public class PrintVenue extends AMenu{
 
-    public PrintVenue(int optionNumber, Venue venue, Scheduler scheduler) {
-        super(optionNumber, venue, scheduler);
+    public PrintVenue(int optionNumber, Scheduler scheduler) {
+        super(optionNumber, scheduler);
         super.optionDescription = "Print the current seats status of the Venue";
     }
 
 
     public void doMethod() {
-        System.out.println("domethod print venue");
-
+        super.scheduler.venue.prettyPrint();
     }
 }

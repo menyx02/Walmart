@@ -6,6 +6,7 @@ import Model.Seat;
 import Utils.Tools;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Venue {
 
@@ -34,6 +35,7 @@ public class Venue {
             for(int c = 0; c < numColumns; c++) {
                 int tempPrice = this.calculatePrice(r);
                 Seat seat = new Seat(new Position(r,c), Seat.Status.AVAILABLE, tempPrice);
+                seats[r][c] = seat;
             }
         }
     }
@@ -55,8 +57,12 @@ public class Venue {
     //This method prints a representation of the venue
     public void prettyPrint() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Tools.ANSI_CYAN + "---STAGE---\n");
-        sb.append("-----------\n" + Tools.ANSI_RESET);
+        String stage = String.join("", Collections.nCopies(((numColumns/2)-1)," - "));
+        sb.append(Tools.ANSI_CYAN + stage + "STAGE" + stage + "\n");
+        sb.append(String.join("", Collections.nCopies(numColumns, " - ")) + "\n");
+        sb.append(String.join("", Collections.nCopies(numColumns, " - ")) + "\n" + Tools.ANSI_RESET);
+
+        //TODO - figure out a way to add row and column markers
 
         for(int r = 0; r < numRows; r++) {
             for(int c = 0; c < numColumns; c++) {
@@ -75,4 +81,10 @@ public class Venue {
     public void addReservation(Reservation reservation) {
         this.reservations.add(reservation);
     }
+
+    public int getAvailableSeats(){return availableSeats;}
+
+    public int getTotalSeats() {return totalSeats;}
+
+    public ArrayList<Reservation> getReservations() {return reservations;}
 }

@@ -7,12 +7,10 @@ public abstract class AMenu {
 
     protected int optionNumber;
     protected String optionDescription;
-    protected Venue venue;
     protected Scheduler scheduler;
 
-    public AMenu(int optionNumber, Venue venue, Scheduler scheduler) {
+    public AMenu(int optionNumber, Scheduler scheduler) {
         this.optionNumber = optionNumber;
-        this.venue = venue;
         this.scheduler = scheduler;
     }
 
