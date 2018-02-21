@@ -14,9 +14,11 @@ public abstract class AMenu {
     }
 
     //Method to print the option description out to the console
-    abstract void printOption();
+    public void printOption() {
+        System.out.println("Option " + this.optionNumber + ": " + this.optionDescription);
+    }
 
     //If the menu is selected, then the doMethod performs the corresponding action
-    abstract void doMethod();
+    public abstract void doMethod();
 
 }

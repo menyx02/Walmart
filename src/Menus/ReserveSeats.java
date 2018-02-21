@@ -7,9 +7,6 @@ public class ReserveSeats extends AMenu{
         super.optionDescription = "Look up reservations";
     }
 
-    public void printOption() {
-        System.out.println("Option " + super.optionNumber + ": " + super.optionDescription);
-    }
 
     public void doMethod() {
         System.out.println("domethod Reserve seats");

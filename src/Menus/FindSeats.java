@@ -7,9 +7,6 @@ public class FindSeats extends AMenu {
         super.optionDescription = "Find available seats";
     }
 
-    public void printOption() {
-        System.out.println("Option " + super.optionNumber + ": " + super.optionDescription);
-    }
 
     public void doMethod() {
 
