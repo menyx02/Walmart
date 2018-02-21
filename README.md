@@ -13,3 +13,6 @@ Assumptions:
 Best seats are defined as the seats closest to the stage.
 The program will always prioritize seats together when searching for available 
 seats, before than closeness to the stage. 
+Scheduler uses interface so that if there are changes to the process we can easily switch it out without having to refactor everything. For example, if the assumption of best seat changes from closest to the stage from to cheapest, or the algorithm to find seats changes, then we can create a different subtype that implements the method on a different way and everything keeps working the same.
+The venue class is also an interface because of the same reasons as the scheduler. 
+The menu is an abstract class, because at this point I know of the options that were required, but if more options are added or taken away, then I'd have to change a lot of if statments if I hard coded the menu options. 
