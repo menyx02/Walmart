@@ -32,4 +32,8 @@ public class Seat {
     public Position getPosition() {return position;}
 
     public Status checkStatus() {return status;}
+
+    public long getLastModified() {return lastModified;}
+
+    public int getPrice() {return price;}
 }

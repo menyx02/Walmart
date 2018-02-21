@@ -1,4 +1,5 @@
 import Menus.*;
+import Model.Position;
 import Model.Seat;
 import Schedulers.IScheduler;
 import Schedulers.Scheduler;
