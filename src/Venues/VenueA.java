@@ -73,6 +73,27 @@ public abstract class VenueA {
         System.out.println(sb.toString());
     }
 
+    public Seat[] getSeats(ArrayList<Position> listOfTickets) {
+        Seat[] seats = new Seat[listOfTickets.size()];
+
+
+        for(int i = 0; i < listOfTickets.size(); i++) {
+            int row = listOfTickets.get(i).row;
+            int column = listOfTickets.get(i).column;
+            seats[i] = this.getSeatAt(row, column);
+        }
+
+        return seats;
+    }
+
+    public void decreaseAvailableTicketsBy(int ticketsTaken) {
+        this.availableSeats = availableSeats - ticketsTaken;
+    }
+
+    public void increaseAvailableTicketsBy(int ticketsReturned) {
+        this.availableSeats = availableSeats + ticketsReturned;
+    }
+
     public Seat getSeatAt(int row, int column) {
         return seats[row][column];
     }
@@ -87,8 +108,8 @@ public abstract class VenueA {
 
     public ArrayList<Reservation> getReservations() {return reservations;}
 
-    public abstract int getAvailableSeatsAtRow(int row);
+    abstract int getAvailableSeatsAtRow(int row);
 
-    //public abstract ArrayList<Position>
+    public abstract ArrayList<Integer> getIndexesOfRowsThatHaveEnoughSeats(int numberTicketsWanted);
 
 }

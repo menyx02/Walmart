@@ -33,6 +33,7 @@ public class ReserveSeats extends AMenu{
             System.out.println("Thank you " + userName + ". Please indicate the number of tickets that you want:");
             numberTicketsWanted = sc.nextInt();
 
+            if(numberTicketsWanted < 1) throw new Exception();
 
             System.out.println("Thank you! If you want us to try to get those seats together type 1, if you "
             + "don't have a preference type 0");

@@ -13,13 +13,11 @@ public class Driver {
 
 
     public static void main(String[] args) {
-
         //Initialize Venue
         VenueA venue = new Venue(5, 5);
 
         //Initialize Scheduler
         Scheduler scheduler = new Scheduler(venue);
-
         //TODO-potentially make the scheduler a singleton
 
         //Initialize Menu

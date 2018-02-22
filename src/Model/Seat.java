@@ -8,24 +8,27 @@ public class Seat {
         AVAILABLE, HELD, RESERVED
     }
 
-
-
     private Position position;
     private Status status;
     private int price;
     private long lastModified;
+    private String owner;
 
     public Seat(Position position, Status status, int price) {
         this.position = position;
         this.status = status;
         this.price = price;
+        this.owner = "";
     }
 
     //Create a timestamp every time the status changes
-    public void changeStatus(Status newStatus) {
+    public void changeStatus(Status newStatus, String newOwner) {
         this.status = newStatus;
+        this.owner = newOwner;
         this.lastModified = System.currentTimeMillis();
     }
+
+    public Status checkStatus() {return status;}
 
     public void changePrice(int price) {
         this.price = price;
@@ -33,7 +36,6 @@ public class Seat {
 
     public Position getPosition() {return position;}
 
-    public Status checkStatus() {return status;}
 
     public long getLastModified() {return lastModified;}
 
