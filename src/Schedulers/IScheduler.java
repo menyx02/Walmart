@@ -9,6 +9,8 @@ public interface IScheduler {
 
     final int TIME_ALLOWANCE = 5;
 
+    void processRequest(String userName, int ticketsWanted, int wantThemTogether);
+
     boolean findIfNumberOfSeatsIsAvailable(int numberOfSeatsWanted);
 
     boolean findIfSeatsWantedAreTogether(int numberofSeatsWanted);

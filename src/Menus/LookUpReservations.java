@@ -2,6 +2,7 @@ package Menus;
 
 import Model.Reservation;
 import Schedulers.Scheduler;
+import Utils.Tools;
 import Venues.Venue;
 
 import java.util.Scanner;
@@ -28,6 +29,6 @@ public class LookUpReservations extends AMenu{
             }
         }
 
-        System.out.println("We are sorry, no reservation matches the name that you provided");
+        Tools.printErrorMessage("We are sorry, no reservation matches the name that you provided\n\n");
     }
 }

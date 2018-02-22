@@ -15,7 +15,7 @@ public class Driver {
     public static void main(String[] args) {
 
         //Initialize Venue
-        VenueA venue = new Venue(9, 31);
+        VenueA venue = new Venue(5, 5);
 
         //Initialize Scheduler
         Scheduler scheduler = new Scheduler(venue);
@@ -44,27 +44,43 @@ public class Driver {
         int currentOption = -1;
         Scanner sc = new Scanner(System.in);
         while(currentOption != exit.getOptionNumber()) {
-            System.out.println("Please select one of the following options by typing the option #" );
+            System.out.println("MAIN MENU:\nPlease select one of the following options by typing the option #" );
             for(AMenu temp: allMenus) {
                 temp.printOption();
             }
 
-            try {
+            menuChecker: try {
                 currentOption = sc.nextInt();
 
+                //If the option is to exit, no need to do anything else. Exit the try clause and proceed
+                if(currentOption == exit.getOptionNumber()) {
+                    exit.doMethod();
+                    break menuChecker;
+                }
 
+                //If other option is selected, look for it in the menu list. Perform operation and go back to main loop
                 for(AMenu temp : allMenus) {
                     if(temp.getOptionNumber() == currentOption) {
-                        System.out.println("Current option: "  + currentOption);
                         allMenus.get(currentOption-1).doMethod();
+                        break menuChecker;
                     }
                 }
+
+                //If we got here, then none of the menus were selected and it's an error
+                throw new Exception("Int but not on the menu");
+
             }
             catch (Exception e) {
                 Tools.printErrorMessage("Sorry, only integers corresponding to the options are allowed. The menu will be "+
                 "reprinted, please try again\n\n\n");
                 currentOption = -1;
-                sc.next();
+
+                //If the Exception was thrown by me, then we don't want to read in again from the scanner until the user
+                //is prompted with the menu again. If the exception was thrown because the input wasn't an int, then
+                //we want to clear the buffer
+                if(e.getMessage() == null) {
+                    sc.next();
+                }
             }
         }
 

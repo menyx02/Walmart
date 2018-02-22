@@ -26,13 +26,11 @@ public abstract class VenueA {
         this.availableSeats = numRows * numColumns;
         this.reservations = new ArrayList<Reservation>();
         this.initializeSeats();
-
     }
 
 
     //This method fills up the array with seats, and initializes each one of them
     private void initializeSeats() {
-
         for(int r = 0; r < numRows; r++) {
             for(int c = 0; c < numColumns; c++) {
                 int tempPrice = this.calculatePrice(r);
@@ -57,9 +55,6 @@ public abstract class VenueA {
 
     //This method prints a representation of the venue
     public void prettyPrint() {
-        System.out.println(numRows);
-        System.out.println(numColumns);
-        System.out.println(seats[0][0]);
         StringBuilder sb = new StringBuilder();
         String stage = String.join("", Collections.nCopies(((numColumns/2)-1)," - "));
         sb.append(Tools.ANSI_CYAN + stage + "STAGE" + stage + "\n");
