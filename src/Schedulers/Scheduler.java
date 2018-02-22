@@ -2,15 +2,16 @@ package Schedulers;
 
 import Model.Position;
 import Venues.Venue;
+import Venues.VenueA;
 
 import java.util.ArrayList;
 
 public class Scheduler implements IScheduler{
 
-    public Venue venue;
+    public VenueA venue;
 
 
-    public Scheduler(Venue venue) {
+    public Scheduler(VenueA venue) {
         this.venue = venue;
     }
 

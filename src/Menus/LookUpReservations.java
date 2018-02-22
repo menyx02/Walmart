@@ -17,11 +17,12 @@ public class LookUpReservations extends AMenu{
     public void doMethod() {
         System.out.println("domethod look up reservations ");
 
-        System.out.println("Please provide your name to look for your reservation");
+        System.out.println("Please provide your name to look for your reservation\n");
         Scanner sc = new Scanner(System.in);
         String nameQuery = sc.nextLine();
         for(Reservation temp : scheduler.venue.getReservations()) {
             if(nameQuery.toLowerCase().equals(temp.getOwner())) {
+                System.out.println("We found the following reservation under the name " + nameQuery);
                 temp.prettyPrintReservation();
                 return;
             }
