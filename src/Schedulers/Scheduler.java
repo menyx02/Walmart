@@ -51,12 +51,12 @@ public class Scheduler implements IScheduler{
 
         ArrayList<Position> list = Tools.convertUserInputToPositions(5);
 
-       this.selectTickets(list);
+        this.selectTickets(list);
         venue.prettyPrint();
         String input = "";
         try {
             System.out.println("reserve? yes/no");
-            input = Tools.sc.nextLine();
+            //input = sc.nextLine();
 
         }
         catch(Exception e) {

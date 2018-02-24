@@ -16,7 +16,6 @@ public class Tools {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-    public static final Scanner sc = new Scanner(System.in);
 
     public static void printErrorMessage(String message) {
         System.out.println(ANSI_RED + message + ANSI_RESET);
@@ -36,12 +35,12 @@ public class Tools {
 
         //Scanner sc = new Scanner(System.in);
         int numberInputReceived = 0;
+        Scanner sc = new Scanner(System.in);
         while(numberInputReceived < numberOfTickets) {
 
             try {
 
-                String input = Tools.sc.nextLine();
-                Thread.sleep(2000);
+                String input = sc.nextLine();
                 if(checkFormatInputTickets(input) == false) throw new Exception();
 
                 int row = input.charAt(0);
@@ -55,7 +54,6 @@ public class Tools {
                 Tools.printErrorMessage("The entry was not recorded, try again");
             }
         }
-        //sc.close();
 
         return listOfTickets;
     }

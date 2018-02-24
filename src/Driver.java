@@ -58,7 +58,7 @@ public class Driver {
                 //If other option is selected, look for it in the menu list. Perform operation and go back to main loop
                 for(AMenu temp : allMenus) {
                     if(temp.getOptionNumber() == currentOption) {
-                        //allMenus.get(currentOption-1).doMethod();
+                        allMenus.get(currentOption-1).doMethod();
                         break menuChecker;
                     }
                 }
