@@ -33,25 +33,14 @@ public abstract class VenueA {
     private void initializeSeats() {
         for(int r = 0; r < numRows; r++) {
             for(int c = 0; c < numColumns; c++) {
-                int tempPrice = this.calculatePrice(r);
+                int tempPrice = this.calculatePriceOfSeat(r);
                 Seat seat = new Seat(new Position(r,c), Seat.Status.AVAILABLE, tempPrice);
                 seats[r][c] = seat;
             }
         }
     }
 
-    //This method calculates the price of the seat based on the row (how close to the stage)
-    private int calculatePrice(int row) {
-        if(row < 4) {
-            return 250;
-        }
-        else if(row < 10) {
-            return 175;
-        }
-        else {
-            return 100;
-        }
-    }
+
 
     //This method prints a representation of the venue
     public void prettyPrint() {
@@ -98,6 +87,10 @@ public abstract class VenueA {
         return seats[row][column];
     }
 
+    public int getNumRows(){return numRows;}
+
+    public int getNumColumns() {return numColumns;}
+
     public void addReservation(Reservation reservation) {
         this.reservations.add(reservation);
     }
@@ -109,5 +102,7 @@ public abstract class VenueA {
     public ArrayList<Reservation> getReservations() {return reservations;}
 
     public abstract ArrayList<Integer> getIndexesOfRowsThatHaveEnoughSeats(int numberTicketsWanted);
+
+    public abstract int calculatePriceOfSeat(int row);
 
 }

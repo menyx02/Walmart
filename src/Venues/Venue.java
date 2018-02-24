@@ -39,6 +39,17 @@ public class Venue extends VenueA {
         return counterSeats;
     }
 
-
+    //This method calculates the price of the seat based on the row (how close to the stage)
+    public int calculatePriceOfSeat(int row) {
+        if(row < 4) {
+            return 250;
+        }
+        else if(row < 10) {
+            return 175;
+        }
+        else {
+            return 100;
+        }
+    }
 
 }

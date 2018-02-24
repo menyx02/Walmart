@@ -31,7 +31,7 @@ public class Tools {
 
         System.out.println("Please look at the map and type in the seats that you want to hold using "+
                 "the following format \"row #,column #\", like this: 1,1\n Type in one seat at a time, and press enter " +
-                        "between every entry. Base Index starts at 1");
+                        "between every entry. Base Index for stage map starts at 0");
 
         //Scanner sc = new Scanner(System.in);
         int numberInputReceived = 0;
@@ -43,8 +43,9 @@ public class Tools {
                 String input = sc.nextLine();
                 if(checkFormatInputTickets(input) == false) throw new Exception();
 
-                int row = input.charAt(0);
-                int column = input.charAt(2);
+                int row = Character.getNumericValue(input.charAt(0));
+                int column = Character.getNumericValue(input.charAt(2));
+
                 Position x = new Position(row, column);
                 listOfTickets.add(x);
                 numberInputReceived++;
@@ -63,8 +64,10 @@ public class Tools {
         if(input.length() > 3) return false;
         else if(input.equals("")) return false;
         else if(Character.isDigit(input.charAt(0)) == false) return false;
+        else if(Character.valueOf(input.charAt(0)) < 0) return false;
         else if(input.charAt(1) != ',') return false;
         else if(Character.isDigit(input.charAt(2)) == false ) return false;
+        else if(Character.valueOf(input.charAt(2)) < 0) return false;
         else return true;
     }
 

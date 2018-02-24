@@ -42,7 +42,7 @@ public class ReserveSeats extends AMenu{
             //Error checking
             if(wantSeatsTogether != 0 && wantSeatsTogether != 1) throw new Exception();
 
-           //scheduler.processRequest(userName, numberTicketsWanted, wantSeatsTogether);
+            scheduler.processRequest(userName, numberTicketsWanted, wantSeatsTogether);
 
         }
         catch (Exception e) {

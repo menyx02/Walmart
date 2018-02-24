@@ -47,13 +47,20 @@ public class Scheduler implements IScheduler{
 
         }
 
+        //Print the stage so user can see for seat selection, then get input
         venue.prettyPrint();
+        ArrayList<Position> list = Tools.convertUserInputToPositions(1);
 
-        ArrayList<Position> list = Tools.convertUserInputToPositions(5);
+        if(this.checkIfPositionsAreValidForThisVenue(list) == false) {
+            Tools.printErrorMessage("Sorry, those seat positions are not valid. You are being redirected " +
+            "to the Main Menu, check the stage map and try again");
+            return;
+        }
 
         this.selectTickets(list);
         venue.prettyPrint();
-        String input = "";
+        /*String input = "";
+        Scanner sc = new Scanner(System.in);
         try {
             System.out.println("reserve? yes/no");
             //input = sc.nextLine();
@@ -63,7 +70,7 @@ public class Scheduler implements IScheduler{
 
         }
 
-        if(input.equals("yes")) this.reserveTickets(list, userName);
+        //if(input.equals("yes")) this.reserveTickets(list, userName);*/
 
 
 
@@ -89,6 +96,18 @@ public class Scheduler implements IScheduler{
         }
         return true;
     }
+
+    @Override
+    public boolean checkIfPositionsAreValidForThisVenue(ArrayList<Position> listOfTickets) {
+
+        for(Position temp: listOfTickets) {
+            if(temp.row >= this.venue.getNumRows() || temp.column >= this.venue.getNumColumns())
+                return false;
+        }
+
+        return true;
+    }
+
 
 
     @Override
