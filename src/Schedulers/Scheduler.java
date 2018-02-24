@@ -8,6 +8,7 @@ import Venues.Venue;
 import Venues.VenueA;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Scheduler implements IScheduler{
 
@@ -46,6 +47,26 @@ public class Scheduler implements IScheduler{
 
         }
 
+        venue.prettyPrint();
+
+        ArrayList<Position> list = Tools.convertUserInputToPositions(5);
+
+       this.selectTickets(list);
+        venue.prettyPrint();
+        String input = "";
+        try {
+            System.out.println("reserve? yes/no");
+            input = Tools.sc.nextLine();
+
+        }
+        catch(Exception e) {
+
+        }
+
+        if(input.equals("yes")) this.reserveTickets(list, userName);
+
+
+
     }
 
 
@@ -61,9 +82,36 @@ public class Scheduler implements IScheduler{
         return false;
     }
 
+    @Override
+    public boolean checkIfListTicketsIsAvailable(ArrayList<Position> listOfTickets) {
+        for(Position temp : listOfTickets) {
+            if(venue.getSeatAt(temp.row, temp.column).checkStatus() != Seat.Status.AVAILABLE) return false;
+        }
+        return true;
+    }
+
 
     @Override
-    public void holdTickets(ArrayList<Position> listOfTickets, String userName) {
+    public boolean selectTickets(ArrayList<Position> listOfTickets) {
+        if(this.checkIfListTicketsIsAvailable(listOfTickets) == false) return false;
+
+        for(Position temp : listOfTickets) {
+                venue.getSeatAt(temp.row, temp.column).changeStatus(Seat.Status.SELECTED, "");
+        }
+        return true;
+    }
+
+    @Override
+    public void unselectTickets(ArrayList<Position> listOfTickets) {
+        for(Position temp : listOfTickets) {
+            venue.getSeatAt(temp.row, temp.column).changeStatus(Seat.Status.AVAILABLE, "");
+        }
+    }
+
+
+    @Override
+    public boolean  holdTickets(ArrayList<Position> listOfTickets, String userName) {
+        if(this.checkIfListTicketsIsAvailable(listOfTickets) == false) return false;
         //User is thinking about getting this tickets, hold them.
         for(Position temp : listOfTickets) {
             venue.getSeatAt(temp.row, temp.column).changeStatus(Seat.Status.HELD, userName);
@@ -71,10 +119,23 @@ public class Scheduler implements IScheduler{
 
         //Update availability of venue
         venue.decreaseAvailableTicketsBy(listOfTickets.size());
+        return true;
     }
 
     @Override
+    public void unholdTickets(ArrayList<Position> listOfTickets) {
+        for(Position temp : listOfTickets) {
+            venue.getSeatAt(temp.row, temp.column).changeStatus(Seat.Status.AVAILABLE, "");
+        }
+
+        //Update availability of venue
+        venue.increaseAvailableTicketsBy(listOfTickets.size());
+    }
+
+
+    @Override
     public boolean reserveTickets(ArrayList<Position> listOfTickets, String userName) {
+
         if(checkIfTicketsHaveExpired(listOfTickets) == true) {
             //Reservation can not be made because the user took too long
             updateStatusAfterExpiring(listOfTickets);
@@ -87,7 +148,7 @@ public class Scheduler implements IScheduler{
         }
 
         //Add the reservation to the venue
-        Reservation reservation = new Reservation(userName, listOfTickets.size(), venue.getSeats(listOfTickets));
+        Reservation reservation = new Reservation(userName.toLowerCase(), listOfTickets.size(), venue.getSeats(listOfTickets));
         venue.addReservation(reservation);
 
 

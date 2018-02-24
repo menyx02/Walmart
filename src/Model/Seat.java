@@ -5,7 +5,7 @@ import Utils.Tools;
 public class Seat {
 
     public enum Status {
-        AVAILABLE, HELD, RESERVED
+        AVAILABLE, HELD, RESERVED, SELECTED
     }
 
     private Position position;
@@ -45,6 +45,7 @@ public class Seat {
         if(status == Status.AVAILABLE) return (Tools.ANSI_GREEN + " S " + Tools.ANSI_RESET);
         else if(status == Status.HELD) return (Tools.ANSI_YELLOW + " S " + Tools.ANSI_RESET);
         else if(status == Status.RESERVED) return (Tools.ANSI_RED + " S " + Tools.ANSI_RESET);
+        else if(status == Status.SELECTED) return (Tools.ANSI_PURPLE + " S " + Tools.ANSI_RESET);
         else return "extra, should not be here";
     }
 

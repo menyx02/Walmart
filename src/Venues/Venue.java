@@ -15,14 +15,6 @@ public class Venue extends VenueA {
         super(numRows, numColumns);
      }
 
-    int getAvailableSeatsAtRow(int row) {
-        int counterSeats = 0;
-        for(int i = 0; i < numColumns; i++) {
-            if(seats[row][i].checkStatus() == Seat.Status.AVAILABLE) counterSeats++;
-        }
-
-        return counterSeats;
-    }
 
     //This method will create a list with the row indexes of those rows that have enough
     //tickets to satisfy the number of tickets wanted. Don't have to be together, just
@@ -37,5 +29,16 @@ public class Venue extends VenueA {
         }
         return list;
     }
+
+    private int getAvailableSeatsAtRow(int row) {
+        int counterSeats = 0;
+        for(int i = 0; i < numColumns; i++) {
+            if(seats[row][i].checkStatus() == Seat.Status.AVAILABLE) counterSeats++;
+        }
+
+        return counterSeats;
+    }
+
+
 
 }

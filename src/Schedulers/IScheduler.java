@@ -16,7 +16,15 @@ public interface IScheduler {
 
     boolean findIfSeatsWantedAreTogether(int numberofSeatsWanted);
 
-    void holdTickets(ArrayList<Position> listOfTickets, String userName);
+    boolean checkIfListTicketsIsAvailable(ArrayList<Position> listOfTicktes);
+
+    boolean selectTickets(ArrayList<Position> listOfTickets);
+
+    void unselectTickets(ArrayList<Position> listOfTickets);
+
+    boolean holdTickets(ArrayList<Position> listOfTickets, String userName);
+
+    void unholdTickets(ArrayList<Position> listOfTickets);
 
     //Returns false if the tickets have expired, and reservation can't be made
     boolean reserveTickets(ArrayList<Position> listOfTickets, String userName);

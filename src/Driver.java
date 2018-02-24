@@ -35,12 +35,10 @@ public class Driver {
         allMenus.add(exit);
 
 
-
         //Enter Menu
         System.out.println("Welcome to ticket master!");
-
-        int currentOption = -1;
         Scanner sc = new Scanner(System.in);
+        int currentOption = -1;
         while(currentOption != exit.getOptionNumber()) {
             System.out.println("MAIN MENU:\nPlease select one of the following options by typing the option #" );
             for(AMenu temp: allMenus) {
@@ -48,7 +46,8 @@ public class Driver {
             }
 
             menuChecker: try {
-                currentOption = sc.nextInt();
+                String input = sc.nextLine();
+                currentOption = Integer.parseInt(input);
 
                 //If the option is to exit, no need to do anything else. Exit the try clause and proceed
                 if(currentOption == exit.getOptionNumber()) {
@@ -59,7 +58,7 @@ public class Driver {
                 //If other option is selected, look for it in the menu list. Perform operation and go back to main loop
                 for(AMenu temp : allMenus) {
                     if(temp.getOptionNumber() == currentOption) {
-                        allMenus.get(currentOption-1).doMethod();
+                        //allMenus.get(currentOption-1).doMethod();
                         break menuChecker;
                     }
                 }
@@ -77,7 +76,7 @@ public class Driver {
                 //is prompted with the menu again. If the exception was thrown because the input wasn't an int, then
                 //we want to clear the buffer
                 if(e.getMessage() == null) {
-                    sc.next();
+                    sc.nextLine();
                 }
             }
         }

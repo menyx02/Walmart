@@ -108,8 +108,6 @@ public abstract class VenueA {
 
     public ArrayList<Reservation> getReservations() {return reservations;}
 
-    abstract int getAvailableSeatsAtRow(int row);
-
     public abstract ArrayList<Integer> getIndexesOfRowsThatHaveEnoughSeats(int numberTicketsWanted);
 
 }
