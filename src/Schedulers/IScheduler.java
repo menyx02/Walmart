@@ -9,7 +9,7 @@ public interface IScheduler {
 
     final int TIME_ALLOWANCE = 5000;
 
-    void processRequest(String userName, int ticketsWanted, int wantThemTogether);
+    void processRequest(String userName, int ticketsWanted);
 
     //Return False if the number of seats wanted are not available in the venue
     boolean findIfNumberOfSeatsIsAvailable(int numberOfSeatsWanted);

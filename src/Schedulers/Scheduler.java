@@ -23,7 +23,7 @@ public class Scheduler implements IScheduler{
     //TODO- if status is changed, make sure the venue availability updates as well
 
     @Override
-    public void processRequest(String userName, int ticketsWanted, int wantThemTogether) {
+    public void processRequest(String userName, int ticketsWanted) {
 
         //CHECK IF THOSE MANY SEATS ARE AVAILABLE
         if(findIfNumberOfSeatsIsAvailable(ticketsWanted) == false) {
@@ -38,27 +38,46 @@ public class Scheduler implements IScheduler{
         // as temporary owners of the tickets, and create timestamp. When confirmation, check that the hold was made
         //by that person and that it's within the allotted time.
 
-        //if together try to get together
-        if(wantThemTogether == 1) {
 
+
+
+        //SELECT TICKETS
+        Scanner sc = new Scanner(System.in);
+        int doneSelecting = 0;
+        while(doneSelecting != 1) {
+            //Print the stage so user can see for seat selection, then get input
+            venue.prettyPrint();
+            ArrayList<Position> list = Tools.convertUserInputToPositions(ticketsWanted);
+
+            if(this.checkIfPositionsAreValidForThisVenue(list) == false) {
+                Tools.printErrorMessage("Sorry, those seat positions are not valid. You are being redirected " +
+                        "to the Main Menu, check the stage map and try again\n\n");
+                return;
+            }
+
+            this.selectTickets(list);
+            venue.prettyPrint();
+
+            System.out.println("Do you like your selection and do you want to move to the reservation page? yes/no");
+            try {
+                String input = sc.nextLine();
+
+                if(input.equals("yes")) doneSelecting = 1;
+                else if(input.equals("no"))  {
+                    this.unselectTickets(list);
+                    System.out.println("Ok, try different seats!");
+                }
+                else throw new Exception();
+            }
+            catch (Exception e) {
+                Tools.printErrorMessage("Sorry, not valid input. Try again");
+                this.unselectTickets(list);
+            }
         }
-        //
-        else if(wantThemTogether == 0) {
 
-        }
 
-        //Print the stage so user can see for seat selection, then get input
-        venue.prettyPrint();
-        ArrayList<Position> list = Tools.convertUserInputToPositions(1);
+        //TICKETS HOLD - RESERVATION
 
-        if(this.checkIfPositionsAreValidForThisVenue(list) == false) {
-            Tools.printErrorMessage("Sorry, those seat positions are not valid. You are being redirected " +
-            "to the Main Menu, check the stage map and try again");
-            return;
-        }
-
-        this.selectTickets(list);
-        venue.prettyPrint();
         /*String input = "";
         Scanner sc = new Scanner(System.in);
         try {
@@ -71,8 +90,6 @@ public class Scheduler implements IScheduler{
         }
 
         //if(input.equals("yes")) this.reserveTickets(list, userName);*/
-
-
 
     }
 

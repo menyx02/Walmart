@@ -35,14 +35,7 @@ public class ReserveSeats extends AMenu{
 
             if(numberTicketsWanted < 1) throw new Exception();
 
-            System.out.println("Thank you! If you want us to try to get those seats together type 1, if you "
-            + "don't have a preference type 0");
-            wantSeatsTogether = sc.nextInt();
-
-            //Error checking
-            if(wantSeatsTogether != 0 && wantSeatsTogether != 1) throw new Exception();
-
-            scheduler.processRequest(userName, numberTicketsWanted, wantSeatsTogether);
+            scheduler.processRequest(userName, numberTicketsWanted);
 
         }
         catch (Exception e) {

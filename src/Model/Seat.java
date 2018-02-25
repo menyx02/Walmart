@@ -49,4 +49,15 @@ public class Seat {
         else return "extra, should not be here";
     }
 
+    public static String getStatusCoding() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Tools.ANSI_GREEN + "S: available\n");
+        sb.append(Tools.ANSI_PURPLE + "S: selected\n");
+        sb.append(Tools.ANSI_YELLOW + "S: held\n");
+        sb.append(Tools.ANSI_RED + "S: reserved\n" + Tools.ANSI_RESET);
+
+        return sb.toString();
+    }
+
+
 }

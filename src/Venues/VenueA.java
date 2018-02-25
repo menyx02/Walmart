@@ -59,6 +59,8 @@ public abstract class VenueA {
             sb.append("\n");
         }
 
+        sb.append(Seat.getStatusCoding());
+
         System.out.println(sb.toString());
     }
 
