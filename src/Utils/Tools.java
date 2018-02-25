@@ -36,18 +36,26 @@ public class Tools {
         //Scanner sc = new Scanner(System.in);
         int numberInputReceived = 0;
         Scanner sc = new Scanner(System.in);
+        sc.useDelimiter(",");
         while(numberInputReceived < numberOfTickets) {
 
             try {
 
                 String input = sc.nextLine();
-                if(checkFormatInputTickets(input) == false) throw new Exception();
 
-                int row = Character.getNumericValue(input.charAt(0));
-                int column = Character.getNumericValue(input.charAt(2));
+                Position extract = checkFormatInputTickets(input);
+                if(extract == null) {
+                    throw new Exception();
+                }
 
-                Position x = new Position(row, column);
-                listOfTickets.add(x);
+
+                //Dont allow duplicates
+                if(listOfTickets.contains(extract) == true) {
+                    Tools.printErrorMessage("Sorry, that was a duplicate entry. Try again");
+                    continue;
+                }
+
+                listOfTickets.add(extract);
                 numberInputReceived++;
             }
             catch(Exception e) {
@@ -60,15 +68,26 @@ public class Tools {
     }
 
     //Returns false if any of the format requirements fails
-    public static boolean checkFormatInputTickets(String input) {
-        if(input.length() > 3) return false;
-        else if(input.equals("")) return false;
-        else if(Character.isDigit(input.charAt(0)) == false) return false;
-        else if(Character.valueOf(input.charAt(0)) < 0) return false;
-        else if(input.charAt(1) != ',') return false;
-        else if(Character.isDigit(input.charAt(2)) == false ) return false;
-        else if(Character.valueOf(input.charAt(2)) < 0) return false;
-        else return true;
+    public static Position checkFormatInputTickets(String input) {
+        if(!input.contains(",")) return null;
+        else if(input.equals("")) return null;
+
+        Scanner sc = new Scanner(input);
+        sc.useDelimiter(",");
+
+
+        try {
+            int firstNumber = sc.nextInt();
+            int secondNumber = sc.nextInt();
+
+            Position extract = new Position(firstNumber, secondNumber);
+            return extract;
+
+        }
+        catch (Exception e) {
+            return null;
+        }
+
     }
 
 

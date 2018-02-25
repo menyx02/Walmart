@@ -14,7 +14,7 @@ public class Driver {
 
     public static void main(String[] args) {
         //Initialize Venue
-        VenueA venue = new Venue(5, 5);
+        VenueA venue = new Venue(15, 15);
 
         //Initialize Scheduler
         Scheduler scheduler = new Scheduler(venue);

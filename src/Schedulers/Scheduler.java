@@ -97,7 +97,7 @@ public class Scheduler implements IScheduler{
         }
         venue.prettyPrint();
         System.out.println();
-        System.out.println("We can hold your seats for 10 seconds, if the reservation hasn't been confirmed " +
+        System.out.println("We can hold your seats for 15 seconds, if the reservation hasn't been confirmed " +
         "by then the seats will expire and you will have to start the process again");
 
         System.out.println("Do you want to reserve these seats? yes/no. Type main menu to go back");
