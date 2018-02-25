@@ -43,11 +43,12 @@ public class Scheduler implements IScheduler{
 
         //SELECT TICKETS
         Scanner sc = new Scanner(System.in);
+        ArrayList<Position> list = new ArrayList<Position>();
         int doneSelecting = 0;
         while(doneSelecting != 1) {
             //Print the stage so user can see for seat selection, then get input
             venue.prettyPrint();
-            ArrayList<Position> list = Tools.convertUserInputToPositions(ticketsWanted);
+            list = Tools.convertUserInputToPositions(ticketsWanted);
 
             if(this.checkIfPositionsAreValidForThisVenue(list) == false) {
                 Tools.printErrorMessage("Sorry, those seat positions are not valid. You are being redirected " +
@@ -57,8 +58,10 @@ public class Scheduler implements IScheduler{
 
             this.selectTickets(list);
             venue.prettyPrint();
+            venue.printSelectedTickets(list);
 
-            System.out.println("Do you like your selection and do you want to move to the reservation page? yes/no");
+            System.out.println("Do you like your selection and do you want to move to the reservation page? yes/no. " +
+                    "Type main menu to go back");
             try {
                 String input = sc.nextLine();
 
@@ -66,6 +69,10 @@ public class Scheduler implements IScheduler{
                 else if(input.equals("no"))  {
                     this.unselectTickets(list);
                     System.out.println("Ok, try different seats!");
+                }
+                else if(input.equals("main menu")) {
+                    this.unselectTickets(list);
+                    return;
                 }
                 else throw new Exception();
             }
@@ -78,19 +85,52 @@ public class Scheduler implements IScheduler{
 
         //TICKETS HOLD - RESERVATION
 
-        /*String input = "";
-        Scanner sc = new Scanner(System.in);
-        try {
-            System.out.println("reserve? yes/no");
-            //input = sc.nextLine();
+        //Change the tickets from selected to held
+        this.unselectTickets(list);
+        this.holdTickets(list, userName);
 
+
+        System.out.println("\n\n\nWelcome to the reservation page! The seats that you have selected are:\n");
+        for(Position temp: list ){
+            System.out.println("Row: " + temp.row + " Column: " + temp.column);
+        }
+        venue.prettyPrint();
+        System.out.println();
+        System.out.println("We can hold your seats for 10 seconds, if the reservation hasn't been confirmed " +
+        "by then the seats will expire and you will have to start the process again");
+
+        System.out.println("Do you want to reserve these seats? yes/no. Type main menu to go back");
+
+        try {
+            String input = sc.nextLine();
+            if(input.equals("yes")) {
+                boolean processed = this.reserveTickets(list, userName);
+                if(processed == false) {
+                    //Could not reserve tickets
+                    Tools.printErrorMessage("We are sorry! The tickets expired. Try again");
+                    return;
+                }
+                else {
+                    System.out.println("Thanks for buying your tickets with us! Your reservation is shown below:");
+                    System.out.println(this.venue.getReservationByName(userName));
+                    System.out.println("You are now being redirected to the MAIN MENU");
+                    return;
+                }
+            }
+            else if(input.equals("no")) {
+                System.out.println("We are sorry we couldn't assist you. Come back soon!");
+                this.unholdTickets(list);
+                return;
+            }
+            else if(input.equals("main menu")) {
+                System.out.println("Reservation has been cancelled");
+                this.unholdTickets(list);
+                return;
+            }
         }
         catch(Exception e) {
-
+            Tools.printErrorMessage("There was an error processing your request, try again!");
         }
-
-        //if(input.equals("yes")) this.reserveTickets(list, userName);*/
-
     }
 
 
@@ -116,16 +156,12 @@ public class Scheduler implements IScheduler{
 
     @Override
     public boolean checkIfPositionsAreValidForThisVenue(ArrayList<Position> listOfTickets) {
-
         for(Position temp: listOfTickets) {
             if(temp.row >= this.venue.getNumRows() || temp.column >= this.venue.getNumColumns())
                 return false;
         }
-
         return true;
     }
-
-
 
     @Override
     public boolean selectTickets(ArrayList<Position> listOfTickets) {

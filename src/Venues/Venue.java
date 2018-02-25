@@ -52,4 +52,23 @@ public class Venue extends VenueA {
         }
     }
 
+    public int calculatePriceOfList(ArrayList<Position> listOfTickets){
+        int sum = 0;
+        for(Position temp: listOfTickets) {
+            sum += this.calculatePriceOfSeat(temp.row);
+        }
+        return sum;
+    }
+
+    public void printSelectedTickets(ArrayList<Position> listOfTickets) {
+        System.out.println("Number of tickets: " + listOfTickets.size());
+        System.out.println("Total for this order $" + this.calculatePriceOfList(listOfTickets));
+        System.out.println("Seats reserved:");
+
+        for(Position temp: listOfTickets ){
+            System.out.println("Row: " + temp.row + " Column: " + temp.column + " Price: $" + this.calculatePriceOfSeat(temp.row));
+        }
+        System.out.println();
+    }
+
 }

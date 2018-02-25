@@ -19,8 +19,8 @@ public class Reservation {
     public void prettyPrintReservation() {
         System.out.println("\nName for the reservation: " + this.owner);
         System.out.println("Number of tickets: " + this.numTickets);
-        System.out.println("Seats reserved:");
         System.out.println("Total for this order $" + this.totalCost);
+        System.out.println("Seats reserved:");
 
         for(Seat temp: seats ){
             System.out.println("Row: " + temp.getPosition().row + " Column: " + temp.getPosition().column);

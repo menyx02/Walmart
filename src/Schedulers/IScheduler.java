@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface IScheduler {
 
-    final int TIME_ALLOWANCE = 5000;
+    final int TIME_ALLOWANCE = 10000;
 
     void processRequest(String userName, int ticketsWanted);
 

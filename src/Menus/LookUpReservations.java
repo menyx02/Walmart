@@ -21,15 +21,16 @@ public class LookUpReservations extends AMenu{
         System.out.println("Please provide your name to look for your reservation");
         Scanner sc = new Scanner(System.in);
         String nameQuery = sc.nextLine();
-        for(Reservation temp : scheduler.venue.getReservations()) {
-            if(nameQuery.toLowerCase().equals(temp.getOwner())) {
-                System.out.println("We found the following reservation under the name " + nameQuery);
-                temp.prettyPrintReservation();
-                return;
-            }
+
+        Reservation queryReservation = scheduler.venue.getReservationByName(nameQuery);
+        if(queryReservation == null) {
+            Tools.printErrorMessage("We are sorry, no reservation matches the name that you provided\n\n");
+            return;
         }
-
-        Tools.printErrorMessage("We are sorry, no reservation matches the name that you provided\n\n");
-
+        else {
+            System.out.println("We found the following reservation under the name " + nameQuery);
+            queryReservation.prettyPrintReservation();
+            return;
+        }
     }
 }

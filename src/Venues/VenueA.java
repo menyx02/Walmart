@@ -85,6 +85,15 @@ public abstract class VenueA {
         this.availableSeats = availableSeats + ticketsReturned;
     }
 
+    public Reservation getReservationByName(String owner) {
+        for(Reservation temp: reservations) {
+            if(owner.toLowerCase().equals(temp.getOwner())) {
+                return temp;
+            }
+        }
+        return null;
+    }
+
     public Seat getSeatAt(int row, int column) {
         return seats[row][column];
     }
@@ -101,10 +110,14 @@ public abstract class VenueA {
 
     public int getTotalSeats() {return totalSeats;}
 
-    public ArrayList<Reservation> getReservations() {return reservations;}
+    public ArrayList<Reservation> getAllReservations() {return reservations;}
 
     public abstract ArrayList<Integer> getIndexesOfRowsThatHaveEnoughSeats(int numberTicketsWanted);
 
     public abstract int calculatePriceOfSeat(int row);
+
+    public abstract int calculatePriceOfList(ArrayList<Position> listOfTickets);
+
+    public abstract void printSelectedTickets(ArrayList<Position> listOfTickets);
 
 }
