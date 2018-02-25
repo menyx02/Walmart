@@ -13,7 +13,6 @@ public class Exit extends AMenu {
     }
 
     public void doMethod() {
-        System.out.println("domethod exit");
-
+        System.out.println("Thanks for shopping with us! Have a good day!");
     }
 }

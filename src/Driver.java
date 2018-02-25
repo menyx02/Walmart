@@ -81,7 +81,6 @@ public class Driver {
             }
         }
 
-
         //Terminate operations
         sc.close();
     }

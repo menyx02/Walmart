@@ -85,13 +85,16 @@ public abstract class VenueA {
         this.availableSeats = availableSeats + ticketsReturned;
     }
 
-    public Reservation getReservationByName(String owner) {
+    public ArrayList<Reservation> getReservationByName(String owner) {
+        ArrayList<Reservation> reservationsForOwner = new ArrayList<Reservation>();
+
         for(Reservation temp: reservations) {
             if(owner.toLowerCase().equals(temp.getOwner())) {
-                return temp;
+                reservationsForOwner.add(temp);
             }
         }
-        return null;
+
+        return reservationsForOwner;
     }
 
     public Seat getSeatAt(int row, int column) {

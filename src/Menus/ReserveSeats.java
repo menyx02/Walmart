@@ -16,12 +16,7 @@ public class ReserveSeats extends AMenu{
 
 
     public void doMethod() {
-        System.out.println("domethod Reserve seats");
-
-
-        //Scanner sc = new Scanner(System.in);
         int numberTicketsWanted = 0;
-        int wantSeatsTogether = 0;
         String userName = "";
         Scanner sc = new Scanner(System.in);
         try {

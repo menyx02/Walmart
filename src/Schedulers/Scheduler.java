@@ -20,8 +20,6 @@ public class Scheduler implements IScheduler{
     }
 
 
-    //TODO- if status is changed, make sure the venue availability updates as well
-
     @Override
     public void processRequest(String userName, int ticketsWanted) {
 
@@ -56,7 +54,10 @@ public class Scheduler implements IScheduler{
                 return;
             }
 
-            this.selectTickets(list);
+            if(this.selectTickets(list) == false) {
+                Tools.printErrorMessage("At least one of the seats you selected is not available. Try again");
+                continue;
+            }
             venue.prettyPrint();
             venue.printSelectedTickets(list);
 
@@ -107,29 +108,33 @@ public class Scheduler implements IScheduler{
                 boolean processed = this.reserveTickets(list, userName);
                 if(processed == false) {
                     //Could not reserve tickets
-                    Tools.printErrorMessage("We are sorry! The tickets expired. Try again");
+                    Tools.printErrorMessage("We are sorry! The tickets expired. Try again\n\n");
                     return;
                 }
                 else {
-                    System.out.println("Thanks for buying your tickets with us! Your reservation is shown below:");
-                    System.out.println(this.venue.getReservationByName(userName));
-                    System.out.println("You are now being redirected to the MAIN MENU");
+                    System.out.println("Thanks for buying your tickets with us! You can refer to your reservation " +
+                            "through the \"Look up reservations\" option on the main menu");
+                    System.out.println("You are now being redirected to the MAIN MENU\n\n");
                     return;
                 }
             }
             else if(input.equals("no")) {
-                System.out.println("We are sorry we couldn't assist you. Come back soon!");
+                System.out.println("We are sorry we couldn't assist you. Come back soon!\n\n");
                 this.unholdTickets(list);
                 return;
             }
             else if(input.equals("main menu")) {
-                System.out.println("Reservation has been cancelled");
+                System.out.println("Reservation has been cancelled\n\n");
                 this.unholdTickets(list);
                 return;
             }
+            else {
+                throw new Exception();
+            }
         }
         catch(Exception e) {
-            Tools.printErrorMessage("There was an error processing your request, try again!");
+            Tools.printErrorMessage("There was an error processing your request, try again!\n\n");
+            this.unholdTickets(list);
         }
     }
 
@@ -149,7 +154,10 @@ public class Scheduler implements IScheduler{
     @Override
     public boolean checkIfListTicketsIsAvailable(ArrayList<Position> listOfTickets) {
         for(Position temp : listOfTickets) {
-            if(venue.getSeatAt(temp.row, temp.column).checkStatus() != Seat.Status.AVAILABLE) return false;
+            if(venue.getSeatAt(temp.row, temp.column).checkStatus() != Seat.Status.AVAILABLE) {
+                System.out.println("should get here");
+                return false;
+            }
         }
         return true;
     }

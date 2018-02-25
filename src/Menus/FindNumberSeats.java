@@ -13,7 +13,6 @@ public class FindNumberSeats extends AMenu {
     }
 
     public void doMethod() {
-        System.out.println("domethod find number seats");
         System.out.print(Tools.ANSI_GREEN + "Available seats in the venue: " + scheduler.venue.getAvailableSeats() + "/");
         System.out.println(scheduler.venue.getTotalSeats() + Tools.ANSI_RESET + "\n\n");
     }
