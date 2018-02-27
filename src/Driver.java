@@ -13,8 +13,12 @@ public class Driver {
 
 
     public static void main(String[] args) {
+        int numRows = Integer.parseInt(args[0]);
+        int numColumns = Integer.parseInt(args[1]);
+
+
         //Initialize Venue
-        VenueA venue = new Venue(15, 15);
+        VenueA venue = new Venue(numRows, numColumns);
 
         //Initialize Scheduler
         Scheduler scheduler = new Scheduler(venue);
