@@ -19,6 +19,7 @@ public class Seat {
         this.status = status;
         this.price = price;
         this.owner = "";
+        this.lastModified = System.currentTimeMillis();
     }
 
     //Create a timestamp every time the status changes

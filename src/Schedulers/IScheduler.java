@@ -14,8 +14,6 @@ public interface IScheduler {
     //Return False if the number of seats wanted are not available in the venue
     boolean findIfNumberOfSeatsIsAvailable(int numberOfSeatsWanted);
 
-    boolean findIfSeatsWantedAreTogether(int numberOfSeatsWanted);
-
     boolean checkIfListTicketsIsAvailable(ArrayList<Position> listOfTickets);
 
     boolean checkIfPositionsAreValidForThisVenue(ArrayList<Position> listOfTickets);

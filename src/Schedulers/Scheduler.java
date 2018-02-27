@@ -22,7 +22,6 @@ public class Scheduler implements IScheduler{
 
     @Override
     public void processRequest(String userName, int ticketsWanted) {
-
         //CHECK IF THOSE MANY SEATS ARE AVAILABLE
         if(findIfNumberOfSeatsIsAvailable(ticketsWanted) == false) {
             Tools.printErrorMessage("Sorry, we do not have those many seats available. Check the current availability" +
@@ -147,15 +146,9 @@ public class Scheduler implements IScheduler{
 
 
     @Override
-    public boolean findIfSeatsWantedAreTogether(int numberOfSeatsWanted) {
-        return false;
-    }
-
-    @Override
     public boolean checkIfListTicketsIsAvailable(ArrayList<Position> listOfTickets) {
         for(Position temp : listOfTickets) {
             if(venue.getSeatAt(temp.row, temp.column).checkStatus() != Seat.Status.AVAILABLE) {
-                System.out.println("should get here");
                 return false;
             }
         }
@@ -173,7 +166,10 @@ public class Scheduler implements IScheduler{
 
     @Override
     public boolean selectTickets(ArrayList<Position> listOfTickets) {
-        if(this.checkIfListTicketsIsAvailable(listOfTickets) == false) return false;
+        if(this.checkIfListTicketsIsAvailable(listOfTickets) == false){
+            return false;
+
+        }
 
         for(Position temp : listOfTickets) {
                 venue.getSeatAt(temp.row, temp.column).changeStatus(Seat.Status.SELECTED, "");
@@ -230,7 +226,6 @@ public class Scheduler implements IScheduler{
         //Add the reservation to the venue
         Reservation reservation = new Reservation(userName.toLowerCase(), listOfTickets.size(), venue.getSeats(listOfTickets));
         venue.addReservation(reservation);
-
 
         return true;
     }

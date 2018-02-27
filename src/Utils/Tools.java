@@ -48,7 +48,6 @@ public class Tools {
                     throw new Exception();
                 }
 
-
                 //Dont allow duplicates
                 if(listOfTickets.contains(extract) == true) {
                     Tools.printErrorMessage("Sorry, that was a duplicate entry. Try again");
