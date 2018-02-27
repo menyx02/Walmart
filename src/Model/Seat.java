@@ -59,5 +59,21 @@ public class Seat {
         return sb.toString();
     }
 
+    @Override
+    public boolean equals(Object object) {
+
+        boolean scoreKeeper = false;
+
+        if(object != null && object instanceof Seat) {
+
+            scoreKeeper = (this.position.equals(((Seat) object).position));
+            scoreKeeper &= (this.status == ((Seat) object).status);
+            scoreKeeper &= (this.owner.equals(((Seat) object).owner));
+            scoreKeeper &= (this.price == ((Seat) object).price);
+        }
+
+        return scoreKeeper;
+    }
+
 
 }

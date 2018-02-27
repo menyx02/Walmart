@@ -13,15 +13,15 @@ public class Position {
     @Override
     public boolean equals(Object object)
     {
-        boolean sameSame = false;
+        boolean scoreKeeper = false;
 
         if (object != null && object instanceof Position)
         {
-            sameSame = this.row == ((Position) object).row;
-            sameSame = this.column == ((Position) object).column;
+            scoreKeeper = (this.row == ((Position)object).row);
+            scoreKeeper &= (this.column == ((Position) object).column);
         }
 
-        return sameSame;
+        return scoreKeeper;
     }
 
 
